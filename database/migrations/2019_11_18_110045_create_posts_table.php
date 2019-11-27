@@ -21,10 +21,10 @@ class CreatePostsTable extends Migration
             $table->foreign('thread_id')->references('id')->on('threads');
             $table->text('message');
             $table->text('img'); //array of imgs links
-            $table->boolean('is_visible');
+            $table->boolean('is_visible')->default(true);
             $table->string('theme',255)->nullable();
             $table->text('mod_notice')->nullable()->default(null); //Сообщение мода после модерации сообщения.
-            $table->boolean('is_edited');
+            $table->boolean('is_edited')->default(false);
             $table->boolean('is_sage')->default(false);
             $table->text('Ip_hash');
             $table->timestamps();

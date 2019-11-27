@@ -14,8 +14,29 @@
                             </div>
                         @endif
 
-                        Здесь будут доски и панель для логина.
-                        Пример первой доски <a href="{{route('board',['board_prefix' => 'b'])}}">/b/</a>
+                        Список досок.
+
+                            <table class="table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Доска</th>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Описание</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if($boards != null)
+                                    @foreach($boards as $board)
+                                    <tr>
+                                        <td><a href="{{route('board',['board_prefix' => $board->prefix])}}">/{{$board->prefix}}/</a></td>
+                                        <td>{{$board->name}}</td>
+                                        <td>{{$board->description}}</td>
+                                    </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+
                     </div>
                 </div>
             </div>
