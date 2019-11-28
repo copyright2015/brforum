@@ -18,10 +18,21 @@ class BoardContoller extends Controller
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
 //        dump($current_board);
         $threads = Thread::where('board_id',$current_board->id)->get();
-        $threads->load('posts')->limit(3);
+        $threads->load('posts');
+
+        foreach ($threads as $thread) {
+            $thread->posts = $thread->posts->
+            sortBy('created_at')->
+            slice(-3)->all();
+//            filter(function ($value, $key) {return $key   -2;})->all();
+        }
+
+//        dump($posts);
+
         foreach ($threads as $thread){
             dump($thread->posts);
         }
+        $sorted_threads = $threads->sortBy('posts.created_at');
 
 
         return view('board',['board'=>$current_board,'threads'=>$threads]);

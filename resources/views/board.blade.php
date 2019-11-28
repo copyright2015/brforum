@@ -37,7 +37,8 @@
                                         </div>
 
                                     @endforeach
-                        @endforeach
+                                    <hr>
+                                @endforeach
                         @else
                                 <div class="alert alert-primary" role="alert">
                                     Пока что здесь нет тредов.
