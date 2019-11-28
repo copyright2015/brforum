@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function role() {
-        return $this->hasOne('App\Role');
+        return $this->belongsTo('App\Role');
     }
 
     public function posts() {

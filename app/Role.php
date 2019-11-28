@@ -12,7 +12,7 @@ class Role extends Model
         'name', 'sign', 'img', 'board_prefix',
     ];
 
-    public function user () {
-        return $this->belongsTo('App\User');
+    public function users () {
+        return $this->hasMany('App\User');
     }
 }
