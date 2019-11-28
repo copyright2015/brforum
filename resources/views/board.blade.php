@@ -25,6 +25,18 @@
                                    <span> <a href="{{route('thread',['board_prefix'=>$board->prefix,'thread_id'=>$thread->id])}}">Ответить</a></span>
                                 </div>
                             </div>
+                                    @foreach($thread->posts as $post)
+                                        <div class="card mb-4 shadow-sm">
+                                            <div class="card-header">
+                                                <h4 class="my-0 font-weight-normal">{{$post->theme}}</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <span>{{$post->message}}</span>
+                                                <br>
+                                            </div>
+                                        </div>
+
+                                    @endforeach
                         @endforeach
                         @else
                                 <div class="alert alert-primary" role="alert">
