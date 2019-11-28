@@ -9,7 +9,7 @@ class Role extends Model
     //
     //Заполняемы поля
     protected $fillable = [
-        'name', 'sign', 'img', 'board_prefix',
+        'name', 'sign', 'board_prefix',
     ];
 
     public function users () {
