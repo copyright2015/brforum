@@ -2,6 +2,20 @@
 
 @section('content')
     <div class="container">
+    <form>
+        @csrf
+        <div class="form-group">
+            <label for="theme">Тема</label>
+            <input type="text" class="form-control" id="theme" placeholder="Тема">
+        </div>
+        <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+        </div>
+        <button type="Ответить" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
