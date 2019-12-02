@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe8e6488-8187-41af-947a-cb096ed25205" name="Default Changelist" comment="">
-<<<<<<< HEAD
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BoardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BoardContoller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/board.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/board.blade.php" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BoardContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BoardContoller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ThreadContoller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ThreadContoller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_18_110045_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_18_110045_create_posts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/board.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/board.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/thread.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/thread.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
->>>>>>> 80a47c037e7d7392d6ea3677bc61ac7942309caa
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,12 +22,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-<<<<<<< HEAD
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/../tlaravel/package.json" />
   </component>
-=======
->>>>>>> 80a47c037e7d7392d6ea3677bc61ac7942309caa
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
@@ -137,12 +122,6 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tlaravel" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
@@ -178,15 +157,11 @@
       <workItem from="1574153224665" duration="2738000" />
       <workItem from="1574315500633" duration="14997000" />
       <workItem from="1574416231413" duration="7431000" />
-<<<<<<< HEAD
       <workItem from="1574697339006" duration="4147000" />
       <workItem from="1574866691277" duration="5497000" />
       <workItem from="1574881261552" duration="3834000" />
       <workItem from="1574960303223" duration="3938000" />
-=======
-      <workItem from="1574917743263" duration="6832000" />
-      <workItem from="1575005450804" duration="11891000" />
->>>>>>> 80a47c037e7d7392d6ea3677bc61ac7942309caa
+      <workItem from="1575301719347" duration="1125000" />
     </task>
     <servers />
   </component>
