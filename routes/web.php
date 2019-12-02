@@ -25,7 +25,7 @@ Route::post('/{board_prefix}/threads','BoardContoller@add');
 
 //Страница треда с постами.
 Route::get('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@show','as'=>'thread']);
-Route::post('/{board_prefix}/thread/{thread_id}','ThreadContoller@add');
+Route::post('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@add']);
 
 //Страница настроек юзера
 Route::get('/user/settings',['uses'=>'SettingsContoller@show','as'=>'settings']);

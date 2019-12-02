@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('thread_id');
             $table->foreign('thread_id')->references('id')->on('threads');
             $table->text('message');
-            $table->text('img'); //array of imgs links
+            $table->text('img')->nullable(); //array of imgs links
             $table->boolean('is_visible')->default(true);
             $table->string('theme',255)->nullable();
             $table->text('mod_notice')->nullable()->default(null); //Сообщение мода после модерации сообщения.

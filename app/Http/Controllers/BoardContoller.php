@@ -11,6 +11,8 @@ use App\Board;
 class BoardContoller extends Controller
 {
     //Отображение тредов доски
+    protected $bumplimit;
+
     public function show(Request $request, $board_prefix)
     {
 //        $user = User::all()->first();
@@ -19,6 +21,8 @@ class BoardContoller extends Controller
 //        dump($current_board);
         $threads = Thread::where('board_id',$current_board->id)->get();
         $threads->load('posts');
+        $this->bumplimit = $current_board->bumplimit;
+
 
         foreach ($threads as $thread) {
             $thread->posts = $thread->posts->
@@ -29,13 +33,20 @@ class BoardContoller extends Controller
 
 //        dump($posts);
 
-        foreach ($threads as $thread){
-            dump($thread->posts);
-        }
-        $sorted_threads = $threads->sortBy('posts.created_at');
+//        foreach ($threads as $thread){
+//            dump($thread->posts);
+//        }
 
 
-        return view('board',['board'=>$current_board,'threads'=>$threads]);
+
+        $sorted_threads = $threads->sortByDesc('bumped_at');
+
+        dump($sorted_threads);
+
+
+
+
+        return view('board',['board'=>$current_board,'threads'=>$sorted_threads]);
     }
 
     //Создание треда
