@@ -70,7 +70,7 @@
                                 @endforeach
                             @else
                                 <div class="alert alert-primary" role="alert">
-                                    Пока что здесь нет тредов.
+                                    Пока что здесь нет постов.
                                 </div>
                             @endif
 

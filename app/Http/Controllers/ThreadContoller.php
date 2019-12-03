@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Globalset;
 use App\Role;
 use App\User;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Thread;
 use App\Board;
@@ -12,6 +13,7 @@ use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+
 
 class ThreadContoller extends Controller
 {
@@ -47,6 +49,7 @@ class ThreadContoller extends Controller
 
         $request->validate([
             'message' => 'required',
+            'img' => 'nullable|image'
         ]);
 
         dump($request);
@@ -66,8 +69,14 @@ class ThreadContoller extends Controller
 
         $new_post->message = $request->message;
         $new_post->theme = $request->theme;
-        $path = $request->file('img')->store('img');
-        $new_post->img = $path;
+        if($request->img != null) {
+            $path = $request->file('img')->store('img');
+            Log::info(storage_path().'/app/'.$path);
+            $img = Image::make(storage_path().'/app/'.$path)->resize(100, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->insert(substr_replace($path, '_thrumb', -4));
+            $new_post->img = $path;
+        }
 
         $new_post->save();
 

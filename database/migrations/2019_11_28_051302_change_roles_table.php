@@ -29,7 +29,7 @@ class ChangeRolesTable extends Migration
     public function down()
     {
         //
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
