@@ -29,7 +29,9 @@ class Post extends Model
 //        'saved' => PostSaved::class
 //    ];
 
-
+    /**
+     * Привязка сабытия на добавление поста, которое бампает тред
+     */
     protected static function boot()
     {
         parent::boot();

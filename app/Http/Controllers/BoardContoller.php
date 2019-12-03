@@ -10,15 +10,17 @@ use App\Board;
 
 class BoardContoller extends Controller
 {
-    //Отображение тредов доски
     protected $bumplimit;
 
+    /**
+     * Отображение тредов доски
+     * @param Request $request
+     * @param $board_prefix
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request, $board_prefix)
     {
-//        $user = User::all()->first();
-//        dump($user);
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
-//        dump($current_board);
         $threads = Thread::where('board_id',$current_board->id)->get();
         $threads->load('posts');
         $this->bumplimit = $current_board->bumplimit;
@@ -28,23 +30,9 @@ class BoardContoller extends Controller
             $thread->posts = $thread->posts->
             sortBy('created_at')->
             slice(-3)->all();
-//            filter(function ($value, $key) {return $key   -2;})->all();
         }
 
-//        dump($posts);
-
-//        foreach ($threads as $thread){
-//            dump($thread->posts);
-//        }
-
-
-
         $sorted_threads = $threads->sortByDesc('bumped_at');
-
-        dump($sorted_threads);
-
-
-
 
         return view('board',['board'=>$current_board,'threads'=>$sorted_threads]);
     }

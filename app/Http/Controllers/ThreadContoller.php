@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Log;
 
 class ThreadContoller extends Controller
 {
-    //Отображение постов треда
+    /**
+     * Отображение постов треда
+     * @param Request $request
+     * @param $board_prefix
+     * @param $thread_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request, $board_prefix, $thread_id)
     {
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
@@ -23,7 +29,15 @@ class ThreadContoller extends Controller
         return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts]);
     }
 
-    //Отправка формы с данными поста
+
+
+    /**
+     * Отправка формы с данными поста
+     * @param Request $request
+     * @param $board_prefix
+     * @param $thread_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function add(Request $request, $board_prefix, $thread_id)
     {
         Log::info('Пост метод сработал');
