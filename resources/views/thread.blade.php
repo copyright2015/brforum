@@ -2,16 +2,35 @@
 
 @section('content')
     <div class="container">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="theme">Тема</label>
-                <input type="text" class="form-control" id="theme" name="theme" placeholder="Тема">
+                <input type="text" class="form-control @error('theme') is-invalid @enderror" id="theme" name="theme" placeholder="Тема">
             </div>
+            @error('theme')
+            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+            @enderror
             <div class="form-group">
                 <label for="message">Сообщение</label>
-                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="3"></textarea>
             </div>
+            @error('message')
+            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+            @enderror
+            <div>
+                <input type="file" id="img" name="img">
+                <label for="img">Choose file</label>
+            </div>
+            @error('img')
+            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+            @enderror
             <button type="Ответить" class="btn btn-primary">Submit</button>
         </form>
     </div>

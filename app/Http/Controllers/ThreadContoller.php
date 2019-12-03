@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Globalset;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,6 +43,12 @@ class ThreadContoller extends Controller
     {
         Log::info('Пост метод сработал');
 
+        $globalsets = Globalset::find(1);
+
+        $request->validate([
+            'message' => 'required',
+        ]);
+
         dump($request);
         $new_post = new Post;
         $new_post->thread_id = $thread_id;
@@ -59,6 +66,8 @@ class ThreadContoller extends Controller
 
         $new_post->message = $request->message;
         $new_post->theme = $request->theme;
+        $path = $request->file('img')->store('img');
+        $new_post->img = $path;
 
         $new_post->save();
 
