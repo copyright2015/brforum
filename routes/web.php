@@ -12,7 +12,7 @@
 */
 
 //Главная, там будут доски, и панель для логина.
-Route::get('/', ['uses'=>'WelcomeController@show','as'=>'welcome']);
+Route::get('/', ['uses'=>'WelcomeController@show','as'=>'welcome' ,'middleware'=>'web']);
 Route::post('/', 'WelcomeController@login');
 
 //Страница о борде с правилами.
@@ -30,6 +30,8 @@ Route::post('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@add']
 //Страница настроек юзера
 Route::get('/user/settings',['uses'=>'SettingsContoller@show','as'=>'settings']);
 Route::post('/user/settings','SettingsContollerr@save');
+
+
 
 //Группа админских роутов с посредником auth
 Route::group(['prefix'=>'/admin', 'middleware'=>'auth'], function(){

@@ -13,6 +13,7 @@ use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 class ThreadContoller extends Controller
@@ -70,11 +71,9 @@ class ThreadContoller extends Controller
         $new_post->message = $request->message;
         $new_post->theme = $request->theme;
         if($request->img != null) {
-            $path = $request->file('img')->store('img');
-            Log::info(storage_path().'/app/'.$path);
-            $img = Image::make(storage_path().'/app/'.$path)->resize(100, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->insert(substr_replace($path, '_thrumb', -4));
+            $path = $request->file('img')->store('public');
+            Log::info(storage_path('app\\' . $path));
+            Log::info(Storage::get($path));
             $new_post->img = $path;
         }
 

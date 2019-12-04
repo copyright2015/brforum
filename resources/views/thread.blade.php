@@ -23,7 +23,7 @@
                                     </span>
             @enderror
             <div>
-                <input type="file" id="img" name="img">
+                <input type="file" id="img" name="img" multiple>
                 <label for="img">Choose file</label>
             </div>
             @error('img')
