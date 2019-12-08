@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Globalset;
 use App\Role;
 use App\User;
-use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Thread;
 use App\Board;
@@ -13,6 +12,8 @@ use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Image;
+use PhpParser\Node\Stmt\Foreach_;
 
 
 class ThreadContoller extends Controller
@@ -29,6 +30,10 @@ class ThreadContoller extends Controller
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
         $current_thread = Thread::where('id',$thread_id)->get()->first();
         $posts = Post::where('thread_id',$current_thread->id)->get();
+//        dump($posts);
+//        foreach ($posts as $post){
+//            dump($post->img);
+//        }
         return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts]);
     }
 
@@ -46,10 +51,11 @@ class ThreadContoller extends Controller
         Log::info('Пост метод сработал');
 
         $globalsets = Globalset::find(1);
+        $current_board = Board::where('prefix',$board_prefix)->get()->first();
 
         $request->validate([
             'message' => 'required',
-            'img' => 'nullable|image'
+            'img' => 'nullable|file',
         ]);
 
         dump($request);
@@ -67,18 +73,47 @@ class ThreadContoller extends Controller
             $new_post->user_id = $anon_user->id;
         }
 
+        $imgs = [];
         $new_post->message = $request->message;
         $new_post->theme = $request->theme;
-        if($request->img != null) {
-            $path = $request->file('img')->store('img');
-            Log::info(storage_path().'/app/'.$path);
-            $img = Image::make(storage_path().'/app/'.$path)->resize(100, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->insert(substr_replace($path, '_thrumb', -4));
-            $new_post->img = $path;
+
+        if (count($request->file('imgs')) > $current_board->picture_limit){
+            return back()->withErrors(['img'=>'Файлов больше чем '.$current_board->picture_limit]);
         }
 
+        $filesSize = 0;
+        if(count($request->file('imgs')) > 0) {
+            foreach ($request->file('imgs') as $img){
+               $filesSize = $filesSize + $img->getSize();
+            }
+        }
+
+        if($filesSize / 1024  > $globalsets->file_size_limit){
+            return back()->withErrors(['img'=>'Размер файлов больше чем '.$globalsets->file_size_limit . $filesSize]);
+        }
+
+        if(count($request->file('imgs')) > 0) {
+            dump($request->img);
+            $i = 0;
+            foreach ($request->file('imgs') as $img) {
+                $extension = $img->getClientOriginalExtension();
+                $fileName = now()->timestamp;
+                $path = $img->storeAs('public/img', $fileName . '.' . $extension);
+                $sPath = $img->storeAs('public/img', $fileName . 's' . '.' . $extension);
+                Log::info(storage_path('app/' . $sPath));
+                $img = Image::make(storage_path('app/' . $sPath))->resize(150, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $img->save(storage_path('app/' . $sPath));
+//                $imgs['img'.$i] = $path;
+                $imgs['img'.$i] = str_replace('public', 'storage', $path);
+                $i++;
+            }
+        }
+
+        $new_post->img = $imgs;
         $new_post->save();
+
 
         return back();
     }

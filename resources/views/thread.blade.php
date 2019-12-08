@@ -7,30 +7,32 @@
             <div class="form-group">
                 <label for="theme">Тема</label>
                 <input type="text" class="form-control @error('theme') is-invalid @enderror" id="theme" name="theme" placeholder="Тема">
+                @error('theme')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @error('theme')
-            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-            @enderror
+
             <div class="form-group">
                 <label for="message">Сообщение</label>
                 <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="3"></textarea>
+                @error('message')
+                <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @error('message')
-            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-            @enderror
+
             <div>
-                <input type="file" id="img" name="img">
-                <label for="img">Choose file</label>
+                <input type="file" id="img" name="imgs[]" multiple class="form-control @error('img') is-invalid @enderror">
+                @error('img')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-            @error('img')
-            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-            @enderror
+
             <button type="Ответить" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -61,6 +63,13 @@
                                             <h4 class="my-0 font-weight-normal">{{$post->theme}}</h4>
                                         </div>
                                         <div class="card-body">
+                                            @if( $post->img != null)
+                                                @foreach($post->img as $img)
+                                                    <a href="{{url($img)}}" target="_blank">
+                                                        <img class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" width="200" height="144" title="[Click] открыть по центру, [Ctrl+Click] в посте">
+                                                    </a>
+                                                @endforeach
+                                            @endif
                                             <span>{{$post->message}}</span>
                                             <br>
                                         </div>
