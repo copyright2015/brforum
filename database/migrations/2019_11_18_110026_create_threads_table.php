@@ -29,6 +29,7 @@ class CreateThreadsTable extends Migration
             $table->boolean('is_cycled')->default(false);
             $table->boolean('is_edited')->default(false);
             $table->timestamps();
+            $table->timestamp('bumped_at')->nullable();
         });
     }
 

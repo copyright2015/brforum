@@ -23,7 +23,7 @@
                                     </span>
             @enderror
             <div>
-                <input type="file" id="img" name="img" multiple>
+                <input type="file" id="img" name="img">
                 <label for="img">Choose file</label>
             </div>
             @error('img')
@@ -52,8 +52,6 @@
                                 </div>
                                 <div class="card-body">
                                     <span>{{$thread->message}}</span>
-                                    <br>
-                                    <span> <a href="{{route('thread',['board_prefix'=>$board->prefix,'thread_id'=>$thread->id])}}">Ответить</a></span>
                                 </div>
                             </div>
                             @if(count($posts) > 0)

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Stmt\If_;
 
 class RegisterController extends Controller
 {
@@ -65,16 +63,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $new_role = Role::where('name', 'User')->get()->first();
-        If (count(User::all()) == 0){
-            $new_role= Role::where('name', 'Admin')->get()->first();
-        }
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'role_id'=>$new_role->id,
-            ]);
-
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
 }

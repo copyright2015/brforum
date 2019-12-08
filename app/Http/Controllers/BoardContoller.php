@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Thread;
 use App\Board;
-use Illuminate\Support\Facades\Auth;
 
 class BoardContoller extends Controller
 {
@@ -25,7 +24,7 @@ class BoardContoller extends Controller
         $threads = Thread::where('board_id',$current_board->id)->get();
         $threads->load('posts');
         $this->bumplimit = $current_board->bumplimit;
-        dump($this->middleware);
+
 
         foreach ($threads as $thread) {
             $thread->posts = $thread->posts->
@@ -34,8 +33,6 @@ class BoardContoller extends Controller
         }
 
         $sorted_threads = $threads->sortByDesc('bumped_at');
-
-
 
         return view('board',['board'=>$current_board,'threads'=>$sorted_threads]);
     }

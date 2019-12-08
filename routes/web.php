@@ -12,7 +12,7 @@
 */
 
 //Главная, там будут доски, и панель для логина.
-Route::get('/', ['uses'=>'WelcomeController@show','as'=>'welcome' ,'middleware'=>'web']);
+Route::get('/', ['uses'=>'WelcomeController@show','as'=>'welcome']);
 Route::post('/', 'WelcomeController@login');
 
 //Страница о борде с правилами.
@@ -31,8 +31,6 @@ Route::post('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@add']
 Route::get('/user/settings',['uses'=>'SettingsContoller@show','as'=>'settings']);
 Route::post('/user/settings','SettingsContollerr@save');
 
-
-
 //Группа админских роутов с посредником auth
 Route::group(['prefix'=>'/admin', 'middleware'=>'auth'], function(){
 
@@ -42,7 +40,11 @@ Route::group(['prefix'=>'/admin', 'middleware'=>'auth'], function(){
     //Глобальные настройки
     //Доступно только админу
     Route::get('/globalset',['uses'=>'Admin\GlobalsetController@show','as'=>'admin_globalset']);
-    Route::post('/globalset',['uses'=>'Admin\GlobalsetController@unbun']);
+    Route::post('/globalset',['uses'=>'Admin\GlobalsetController@edit']);
+
+    //Создание доски
+    Route::get('/newboard',['uses'=>'Admin\NewBoardController@show','as'=>'admin_newboard']);
+    Route::post('/newboard',['uses'=>'Admin\NewBoardController@create']);
 
     //Список банов. С возможностью разбанить.
     Route::get('/bans',['uses'=>'Admin\BansController@show','as'=>'admin_bans']);

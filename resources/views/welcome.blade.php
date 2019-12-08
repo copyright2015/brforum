@@ -22,6 +22,7 @@
                                     <th scope="col">Доска</th>
                                     <th scope="col">Название</th>
                                     <th scope="col">Описание</th>
+                                    <th scope="col">Всего постов</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +32,7 @@
                                         <td><a href="{{route('board',['board_prefix' => $board->prefix])}}">/{{$board->prefix}}/</a></td>
                                         <td>{{$board->name}}</td>
                                         <td>{{$board->description}}</td>
+                                        <td>{{$postCount}}</td>
                                     </tr>
                                     @endforeach
                                 @endif
