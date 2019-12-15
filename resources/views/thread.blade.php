@@ -66,7 +66,7 @@
                                             @if( $post->img != null)
                                                 @foreach($post->img as $img)
                                                     <a href="{{url($img)}}" target="_blank">
-                                                        <img class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" width="200" height="144" title="[Click] открыть по центру, [Ctrl+Click] в посте">
+                                                        <img class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" title="[Click] открыть по центру, [Ctrl+Click] в посте">
                                                     </a>
                                                 @endforeach
                                             @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Globalset;
+use Layout;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,13 @@ class ThreadContoller extends Controller
 //        foreach ($posts as $post){
 //            dump($post->img);
 //        }
+        dump(Layout::process(">>awdawdd
+        
+**sdfsdf**
+asdaaawdawd 
+>awdawd
+awdaawdawdadddawdaawd
+%%sfsefffw%%"));
         return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts]);
     }
 
@@ -58,7 +66,6 @@ class ThreadContoller extends Controller
             'img' => 'nullable|file',
         ]);
 
-        dump($request);
         $new_post = new Post;
         $new_post->thread_id = $thread_id;
         if(Auth::check()){
@@ -97,7 +104,7 @@ class ThreadContoller extends Controller
             $i = 0;
             foreach ($request->file('imgs') as $img) {
                 $extension = $img->getClientOriginalExtension();
-                $fileName = now()->timestamp;
+                $fileName = now()->timestamp.rand(100,999);
                 $path = $img->storeAs('public/img', $fileName . '.' . $extension);
                 $sPath = $img->storeAs('public/img', $fileName . 's' . '.' . $extension);
                 Log::info(storage_path('app/' . $sPath));
