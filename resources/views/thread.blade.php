@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mb-4">
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
 
             <div>
-                <input type="file" id="img" name="imgs[]" multiple class="form-control @error('img') is-invalid @enderror">
+                <input type="file" id="img" name="imgs[]" multiple class="mb-2 form-control @error('img') is-invalid @enderror">
                 @error('img')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -33,57 +33,47 @@
                 @enderror
             </div>
 
-            <button type="Ответить" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-custom ">Ответить</button>
         </form>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ $board->name }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                            <div class="card mb-4 shadow-sm">
-                                <div class="card-header">
-                                    <h4 class="my-0 font-weight-normal">{{$thread->theme}}</h4>
-                                </div>
-                                <div class="card-body">
-                                    <span>{{$thread->message}}</span>
-                                </div>
-                            </div>
-                            @if(count($posts) > 0)
-                                @foreach($posts as $post)
-                                    <div class="card mb-4 shadow-sm">
-                                        <div class="card-header">
-                                            <h4 class="my-0 font-weight-normal">{{$post->theme}}</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            @if( $post->img != null)
-                                                @foreach($post->img as $img)
-                                                    <a href="{{url($img)}}" target="_blank">
-                                                        <img class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" title="[Click] открыть по центру, [Ctrl+Click] в посте">
-                                                    </a>
-                                                @endforeach
-                                            @endif
-                                            <span>{{$post->message}}</span>
-                                            <br>
-                                        </div>
-                                    </div>
+    <div class="card mb-4">
+        <div class="card-header banana">
+            <h6 class="my-0 font-weight-normal">{{$thread->theme}} | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> </h6>
+        </div>
+        <div class="card-body oppostback">
+            <span>{!! $thread->message !!}</span>
+            @if( $thread->img != null)
+                @foreach($thread->img as $img)
+                    <a href="{{url($img)}}" target="_blank">
+                        <img alt="" class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" title="[Click] открыть по центру, [Ctrl+Click] в посте">
+                    </a>
+                @endforeach
+            @endif
+            @if(count($posts) > 0)
+                @foreach($posts as $post)
+                    <div class="card mb-4">
+                        <div class="card-header banana">
+                            <h6 class="my-0 font-weight-normal">{{$post->theme}} | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></h6>
+                        </div>
+                        <div class="card-body postback">
+                            @if( $post->img != null)
+                                @foreach($post->img as $img)
+                                    <a href="{{url($img)}}" target="_blank">
+                                        <img alt="" class="thumb" src="{{url(substr_replace($img ,'s', -4).substr_replace($img, '' ,'s', -4))}}" title="[Click] открыть по центру, [Ctrl+Click] в посте">
+                                    </a>
                                 @endforeach
-                            @else
-                                <div class="alert alert-primary" role="alert">
-                                    Пока что здесь нет постов.
-                                </div>
                             @endif
-
+                            <span>{!!$post->message!!}</span>
+                            <br>
+                        </div>
                     </div>
+                @endforeach
+            @else
+                <div class="alert alert-primary" role="alert">
+                    Пока что здесь нет постов.
                 </div>
-            </div>
+            @endif
         </div>
     </div>
+
 @endsection

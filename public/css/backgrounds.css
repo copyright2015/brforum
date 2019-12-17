@@ -1,0 +1,31 @@
+body
+{
+    background-image: url(../img/bg.png);
+}
+
+.postback
+{
+    background-image: url(../img/td.png);
+}
+
+.oppostback
+{
+    background-image: url(../img/bg.png);
+}
+
+.banana
+{
+    background-color: #FEE97D;
+}
+
+.logo
+{
+    height: 30px;
+}
+
+.btn-custom
+{
+    color: #fff;
+    background-color: #2a9055;
+    border-color: #2a9055;
+}

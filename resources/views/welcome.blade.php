@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Главная</div>
+                    <div class="card-header banana">Главная</div>
 
-                    <div class="card-body">
+                    <div class="card-body postback">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -16,7 +16,7 @@
 
                         Список досок.
 
-                            <table class="table table-dark">
+                            <table class="table table-light">
                                 <thead>
                                 <tr>
                                     <th scope="col">Доска</th>

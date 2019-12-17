@@ -1,0 +1,13 @@
+.greentext
+{
+    color: forestgreen;
+}
+
+.spoiler{
+    background-color:#1b1e21;
+}
+
+.spoiler:hover{
+    color: #e2f0fb;
+    background-color:#6c757d;
+}
