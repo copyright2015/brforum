@@ -8,20 +8,30 @@ use Illuminate\Support\Facades\Config;
 
 class ProcessLayout
 {
+    /**
+     * Основной метод который последовательно произдодит замену бордовой разметки на html теги
+     * @param $text
+     * @return mixed|string|string[]|null
+     */
     public static function process($text)
     {
         $obj = new self;
-
+        //вызываем методы замены разметки на html код
         $text = $obj->replaceReply($text, 'layout.replay');
-
         $text = $obj->replaceGreenT($text, 'layout.green_text');
         $text = $obj->replace($text, 'layout.text_format');
-
+        //заменяем все концы строк на br
         $text = str_replace("\n",'<br>',$text);
 
         return $text;
     }
 
+    /**
+     * Оборачиваем в якорную ссылку ссылки на другие посты
+     * @param $text
+     * @param $config
+     * @return string|string[]|null
+     */
     public function replace($text, $config)
     {
         $layouts = Config::get($config);
@@ -33,6 +43,12 @@ class ProcessLayout
         return $text;
     }
 
+    /**
+     * Оборачиваем в теги гринтекста все строки начинающиеся с '>'
+     * @param $text
+     * @param $config
+     * @return string
+     */
     public function replaceGreenT($text, $config)
     {
         $layouts = Config::get($config);
@@ -40,7 +56,6 @@ class ProcessLayout
         $new_text = [];
         $replacement = explode('@', $layouts[0][1]);
         foreach ($exp_text as $txt) {
-            dump($txt);
             if($txt[0]=='>'){
                 array_push($new_text, $replacement[0] . $txt . $replacement[1]);
             }
@@ -51,6 +66,12 @@ class ProcessLayout
         return $text;
     }
 
+    /**
+     * Заменяем обозначения форматирования текста на теги hml
+     * @param $text
+     * @param $config
+     * @return string
+     */
     public function replaceReply($text, $config)
     {
         $layouts = Config::get($config);
