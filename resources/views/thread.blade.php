@@ -38,10 +38,9 @@
     </div>
     <div class="card mb-4">
         <div class="card-header banana">
-            <h6 class="my-0 font-weight-normal">{{$thread->theme}} | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> </h6>
+            <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> </h6>
         </div>
         <div class="card-body oppostback">
-            <span>{!! $thread->message !!}</span>
             @if( $thread->img != null)
                 @foreach($thread->img as $img)
                     <a href="{{url($img)}}" target="_blank">
@@ -49,11 +48,12 @@
                     </a>
                 @endforeach
             @endif
+                <span>{!! $thread->message !!}</span>
             @if(count($posts) > 0)
                 @foreach($posts as $post)
                     <div class="card mb-4">
                         <div class="card-header banana">
-                            <h6 class="my-0 font-weight-normal">{{$post->theme}} | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></h6>
+                            <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$post->theme}}</b> | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></h6>
                         </div>
                         <div class="card-body postback">
                             @if( $post->img != null)

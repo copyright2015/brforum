@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Globalset;
 use Layout;
-use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Thread;
@@ -47,7 +46,6 @@ class ThreadContoller extends Controller
     public function add(Request $request, $board_prefix, $thread_id)
     {
         Log::info('Пост метод сработал');
-        dump($request->img);
 
         $globalsets = Globalset::find(1);
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
@@ -66,7 +64,6 @@ class ThreadContoller extends Controller
         }
         else{
             $new_post->Ip_hash = Hash::make($request->ip());
-            $anon_role = Role::where('name', 'Anon')->get()->first();
             $anon_user = Auth::check() ? Auth::user() : User::where('name', 'Anon')->get()->first();
             $new_post->user_id = $anon_user->id;
         }
