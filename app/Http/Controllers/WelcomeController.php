@@ -24,6 +24,7 @@ class WelcomeController extends Controller
                 $postsCount = $postsCount + count($thread->posts);
             }
         }
+        dump($boards);
         return view('welcome',[
             'boards' => $boards,
             'lastPosts' => $lastPosts,

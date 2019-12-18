@@ -41,6 +41,7 @@
             <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> </h6>
         </div>
         <div class="card-body oppostback">
+        <div class="mb-4">
             @if( $thread->img != null)
                 @foreach($thread->img as $img)
                     <a href="{{url($img)}}" target="_blank">
@@ -49,6 +50,7 @@
                 @endforeach
             @endif
                 <span>{!! $thread->message !!}</span>
+        </div>
             @if(count($posts) > 0)
                 @foreach($posts as $post)
                     <div class="card mb-4">

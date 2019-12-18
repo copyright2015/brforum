@@ -67,12 +67,13 @@ class BoardContoller extends Controller
             $anon_user = Auth::check() ? Auth::user() : User::where('name', 'Anon')->get()->first();
             $new_thread->user_id = $anon_user->id;
         }
+        $imgs = [];
+        $new_thread->message = Layout::process($request->message);
+        $new_thread->theme = $request->theme;
         //проверяем наличие картинок
         if ($request->imgs != null) {
             //проверяем количество фалов
-            $imgs = [];
-            $new_thread->message = Layout::process($request->message);
-            $new_thread->theme = $request->theme;
+
             if (count($request->file('imgs')) > $current_board->picture_limit) {
                 return back()->withErrors(['img' => 'Файлов больше чем ' . $current_board->picture_limit]);
             }
@@ -106,6 +107,7 @@ class BoardContoller extends Controller
                     $i++;
                 }
             }
+
         }
         $new_thread->img = $imgs;
         $new_thread->bumped_at = now();

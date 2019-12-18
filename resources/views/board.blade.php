@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
+
+
 @section('content')
+    @include('layouts.boardtop');
     <div class="container mb-4">
         <form method="post" enctype="multipart/form-data">
             @csrf

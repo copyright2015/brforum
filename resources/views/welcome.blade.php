@@ -32,7 +32,7 @@
                                         <td><a href="{{route('board',['board_prefix' => $board->prefix])}}">/{{$board->prefix}}/</a></td>
                                         <td>{{$board->name}}</td>
                                         <td>{{$board->description}}</td>
-                                        <td>{{$postCount}}</td>
+                                        <td>{{(isset($board->threads->posts)) ? count($board->threads) : 0}}</td>
                                     </tr>
                                     @endforeach
                                 @endif

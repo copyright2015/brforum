@@ -67,12 +67,13 @@ class ThreadContoller extends Controller
             $anon_user = Auth::check() ? Auth::user() : User::where('name', 'Anon')->get()->first();
             $new_post->user_id = $anon_user->id;
         }
+        $imgs = [];
+        $new_post->message = Layout::process($request->message);
+        $new_post->theme = $request->theme;
         //проверяем наличие картинок
         if ($request->imgs != null) {
             //проверяем количество фалов
-            $imgs = [];
-            $new_post->message = Layout::process($request->message);
-            $new_post->theme = $request->theme;
+
             if (count($request->file('imgs')) > $current_board->picture_limit) {
                 return back()->withErrors(['img' => 'Файлов больше чем ' . $current_board->picture_limit]);
             }
