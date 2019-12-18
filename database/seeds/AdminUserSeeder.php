@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Админский юзер
         $newUser = User::create([
             'name' => 'Admin',
             'email' => 'Admin@lol.com',
@@ -22,7 +22,7 @@ class AdminUserSeeder extends Seeder
         ]);
         $role = Role::where('name', 'Admin')->get()->first();
         $newUser->roles()->save($role);
-
+        //Анонимный юзер.
         $newUser = User::create([
             'name' => 'Anon',
             'email' => 'Anon@lol.com',
