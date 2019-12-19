@@ -23,6 +23,11 @@ body
     height: 30px;
 }
 
+.mainpic
+{
+    height: 200px;
+}
+
 .btn-custom
 {
     color: #fff;
