@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.boardtop')
     <div class="container mb-4">
         <form method="post" enctype="multipart/form-data">
             @csrf
@@ -38,7 +39,7 @@
     </div>
     <div class="card mb-4">
         <div class="card-header banana">
-            <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> </h6>
+            <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="{{$thread->id}}">{{$thread->id}}</a> </h6>
         </div>
         <div class="card-body oppostback">
         <div class="mb-4">

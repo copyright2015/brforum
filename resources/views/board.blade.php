@@ -3,7 +3,7 @@
 
 
 @section('content')
-    @include('layouts.boardtop');
+    @include('layouts.boardtop')
     <div class="container mb-4">
         <form method="post" enctype="multipart/form-data">
             @csrf

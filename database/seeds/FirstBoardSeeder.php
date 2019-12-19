@@ -42,7 +42,7 @@ class FirstBoardSeeder extends Seeder
                 'thread_limit_per_hour' => 0,
                 'picture_limit' => 4,
                 'default_user_name' => 'Anonymous',
-                'slogan'=>'Великая влясть - великая ответственность',
+                'slogan'=>'Великая сила - великая ответственность',
             ]
         );
         $new_board->save();
