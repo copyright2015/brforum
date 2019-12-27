@@ -49,27 +49,27 @@ class UpdateStats extends Command
             $threads = Thread::where('board_id', $board->id)->get();
             //получаем количество постов
             if ($threads != null) {
-                $new_posts_count = 0;
+//                $new_posts_count = 0;
                 $new_posts_per_hour = 0;
+                $new_posters = [];
                 foreach ($threads as $thread) {
-                    $thread->load('posts');
-                    Log::info(count($thread->posts));
-
-                    $new_posts_count = $new_posts_count + count($thread->posts);
+//                    $thread->load('posts');
+//                    $new_posts_count = $new_posts_count + count($thread->posts);
+                    //получаем количество постов за час и активных пользователей
                     foreach ($thread->posts as $post){
-                        Log::info("1".now()->sub('1 hour')->format('h:m:s'));
-                        Log::info('2'.now()->format('h:m:s'));
                         if($post->created_at->between(now()->sub('1 hour'), now())){
                             $new_posts_per_hour = $new_posts_per_hour+1;
+                            $new_posters[$post->user_id . $post->ip_hash ] = $post->ip_hash;
                         }
                     }
                 }
-                $stat->total_posts = $new_posts_count;
+//                $stat->total_posts = $new_posts_count;
                 $stat->posts_per_hour = $new_posts_per_hour;
+                if (!empty($new_posters)) {
+                    $stat->posters = count($new_posters);
+                }
             }
-            //получаем количество постов а час
 
-            //получаем количество постеров в час
             $stat->save();
         }
         Log::info('Статистика обновлена');

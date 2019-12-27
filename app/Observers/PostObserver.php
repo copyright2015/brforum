@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Board;
 use App\Post;
+use App\Stat;
 use App\Thread;
 
 class PostObserver
@@ -16,13 +17,17 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        //
+        //Бампаем тред
         $thread_to_bump = Thread::where('id',$post->thread_id)->get()->first();
         $current_board = Board::where('id',$thread_to_bump->board_id)->get()->first();
         if((count($thread_to_bump->posts) < $current_board->bumplimit) && (!$post->is_sage)) {
             $thread_to_bump->bumped_at = now();
             $thread_to_bump->save();
         }
+        //Обновление общего количества постов
+        $stat =  Stat::where('board_prefix', $current_board->prefix)->get()->first();
+        $stat->total_posts = $stat->total_posts+1;
+        $stat->save();
     }
 
     /**

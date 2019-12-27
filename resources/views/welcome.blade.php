@@ -31,6 +31,8 @@
                                     <th scope="col">Доска</th>
                                     <th scope="col">Название</th>
                                     <th scope="col">Описание</th>
+                                    <th scope="col">Постов в час</th>
+                                    <th scope="col">Активных постеров</th>
                                     <th scope="col">Всего постов</th>
                                 </tr>
                                 </thead>
@@ -41,7 +43,9 @@
                                         <td><a href="{{route('board',['board_prefix' => $board->prefix])}}">/{{$board->prefix}}/</a></td>
                                         <td>{{$board->name}}</td>
                                         <td>{{$board->description}}</td>
-                                        <td>{{(isset($board->threads->posts)) ? count($board->threads) : 0}}</td>
+                                        <td>{{$stats[$board->prefix]->posts_per_hour}}</td>
+                                        <td>{{$stats[$board->prefix]->posters}}</td>
+                                        <td>{{$stats[$board->prefix]->total_posts}}</td>
                                     </tr>
                                     @endforeach
                                 @endif
