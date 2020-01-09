@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Globalset;
+use App\Post;
 use Layout;
 use Illuminate\Http\Request;
 use App\User;
@@ -15,8 +16,6 @@ use Image;
 
 class BoardContoller extends Controller
 {
-    protected $bumplimit;
-
     /**
      * Отображение тредов доски
      * @param Request $request
@@ -28,7 +27,6 @@ class BoardContoller extends Controller
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
         $threads = Thread::where('board_id',$current_board->id)->get();
         $threads->load('posts');
-        $this->bumplimit = $current_board->bumplimit;
 
 
         foreach ($threads as $thread) {
@@ -37,8 +35,18 @@ class BoardContoller extends Controller
             slice(-3)->all();
         }
 
+        //Сортируем посты по времени бампа.
         $sorted_threads = $threads->sortByDesc('bumped_at');
 
+        //Выводим закрепленные посты наверх.
+        if($sorted_threads != null) {
+            for ($i = 0; $i < count($sorted_threads); $i++) {
+                if ($sorted_threads[$i]->is_pinned_up) {
+                    $temp_thread = $sorted_threads->pull($i);
+                    $sorted_threads->prepend($temp_thread);
+                }
+            }
+        }
         return view('board',['board'=>$current_board,'threads'=>$sorted_threads]);
     }
 
