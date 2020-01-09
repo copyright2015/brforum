@@ -17,17 +17,31 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        //Бампаем тред
-        $thread_to_bump = Thread::where('id',$post->thread_id)->get()->first();
-        $current_board = Board::where('id',$thread_to_bump->board_id)->get()->first();
-        if((count($thread_to_bump->posts) < $current_board->bumplimit) && (!$post->is_sage)) {
-            $thread_to_bump->bumped_at = now();
-            $thread_to_bump->save();
+
+
+        //Получаем инфу о доске и треде поста.
+        $current_thread = Thread::where('id',$post->thread_id)->get()->first();
+        $current_board = Board::where('id',$current_thread->board_id)->get()->first();
+
+        //Удаляем старые посты в цилкичных тредах.
+        if($current_thread->is_cycled) {
+            if(count($current_thread->posts) == $current_board->bumplimit){
+              Post::where('thread_id',$current_thread->id)->first()->delete();
+            }
         }
+
+        //Бампаем тред
+        if((count($current_thread->posts) < $current_board->bumplimit) && (!$post->is_sage)) {
+            $current_thread->bumped_at = now();
+            $current_thread->save();
+        }
+
         //Обновление общего количества постов
         $stat =  Stat::where('board_prefix', $current_board->prefix)->get()->first();
         $stat->total_posts = $stat->total_posts+1;
         $stat->save();
+
+
     }
 
     /**
