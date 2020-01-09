@@ -44,7 +44,7 @@
     @foreach($threads as $thread)
         <div class="card">
             <div class="card-header banana">
-                <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> | <span> <a href="{{route('thread',['board_prefix'=>$board->prefix,'thread_id'=>$thread->id])}}">Ответить</a></span> </h6>
+                <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="">{{$thread->id}}</a> | <span> <a href="{{route('thread',['board_prefix'=>$board->prefix,'thread_id'=>$thread->id])}}">Ответить</a></span> @if($thread->is_pinned_up) Закреплен @endif @if($thread->is_closed) Закрыт @endif @if($thread->is_cycled) Цикличный @endif </h6>
             </div>
             <div class="card-body oppostback">
                 @if( $thread->img != null)

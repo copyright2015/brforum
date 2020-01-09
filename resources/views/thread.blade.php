@@ -2,6 +2,7 @@
 
 @section('content')
     @include('layouts.boardtop')
+    @if(!$thread->is_closed)
     <div class="container mb-4">
         <form method="post" enctype="multipart/form-data">
             @csrf
@@ -37,6 +38,13 @@
             <button type="submit" class="btn btn-custom ">Ответить</button>
         </form>
     </div>
+    @else
+        <div class="container mb-4">
+            <div class="alert alert-danger text-center" role="alert">
+                Тред закрыт.
+            </div>
+        </div>
+    @endif
     <div class="card mb-4">
         <div class="card-header banana">
             <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$thread->theme}}</b> | {{$thread->created_at}} | <a href="#" name="{{$thread->id}}">{{$thread->id}}</a> </h6>
