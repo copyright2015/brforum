@@ -46,19 +46,20 @@ class UpdateStats extends Command
         $stats = Stat::all();
         foreach ($stats as $stat){
             $board = Board::where('prefix',$stat->board_prefix)->get()->first();
-            $threads = Thread::where('board_id', $board->id)->get();
-            //получаем количество постов
+//            $threads = Thread::where('board_id', $board->id)->get();
+            $threads = $board->load('threads');
+            //получаем количество постов в час
             if ($threads != null) {
 //                $new_posts_count = 0;
                 $new_posts_per_hour = 0;
                 $new_posters = [];
                 foreach ($threads as $thread) {
-//                    $thread->load('posts');
+                    $thread->load('posts');
 //                    $new_posts_count = $new_posts_count + count($thread->posts);
                     //получаем количество постов за час и активных пользователей
                     foreach ($thread->posts as $post){
                         if($post->created_at->between(now()->sub('1 hour'), now())){
-                            $new_posts_per_hour = $new_posts_per_hour+1;
+                            $new_posts_per_hour = $new_posts_per_hour + 1;
                             $new_posters[$post->user_id . $post->ip_hash ] = $post->ip_hash;
                         }
                     }
