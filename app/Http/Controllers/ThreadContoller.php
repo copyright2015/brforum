@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Image;
-use PhpParser\Node\Stmt\Foreach_;
+
 
 
 class ThreadContoller extends Controller

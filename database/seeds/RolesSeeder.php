@@ -47,7 +47,7 @@ class RolesSeeder extends Seeder
         DB::table('roles')->insert
         ([
             [
-                'name'=>'Mod_b',
+                'name'=>'Mod',
                 'sign'=>'##Mod_b##',
                 'board_prefix'=>'b'
             ]

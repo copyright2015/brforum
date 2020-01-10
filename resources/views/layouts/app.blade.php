@@ -61,6 +61,20 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <input type="hidden" value="{{$is_allowed = false}}">
+                                    @foreach(Auth::user()->roles()->get() as $role)
+                                        @if($role->name == "Admin" || $role->name == "Mod" || $role->name == "Global_mod")
+                                            <input type="hidden" value="{{$is_allowed = true}}">
+                                        @endif
+                                    @endforeach
+                                    @if($is_allowed)
+                                        <a class="dropdown-item" href="{{route('admin_dashboard')}}">
+                                            {{ __('Панель управления') }}
+                                        </a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{route('settings')}}">
+                                        {{ __('Настройки') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

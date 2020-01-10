@@ -28,8 +28,8 @@ Route::get('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@show',
 Route::post('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@add']);
 
 //Страница настроек юзера
-Route::get('/user/settings',['uses'=>'SettingsContoller@show','as'=>'settings']);
-Route::post('/user/settings','SettingsContollerr@save');
+Route::get('/user/settings',['uses'=>'SettingsController@show', 'as'=>'settings', 'middleware'=>'auth']);
+Route::post('/user/settings','SettingsController@save')->middleware('auth');
 
 //Группа админских роутов с посредником auth
 Route::group(['prefix'=>'/admin', 'middleware'=>'auth'], function(){
