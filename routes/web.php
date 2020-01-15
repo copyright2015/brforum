@@ -32,7 +32,7 @@ Route::get('/user/settings',['uses'=>'SettingsController@show', 'as'=>'settings'
 Route::post('/user/settings','SettingsController@save')->middleware('auth');
 
 //Группа админских роутов с посредником auth
-Route::group(['prefix'=>'/admin', 'middleware'=>'auth'], function(){
+Route::group(['prefix'=>'/admin', 'middleware'=>['auth','acl']], function(){
 
     //Главная страница админки. Ссылки на другие разделы админки и еще ченить полезное
     Route::get('/dashboard',['uses'=>'Admin\DashboardController@show','as'=>'admin_dashboard']);
