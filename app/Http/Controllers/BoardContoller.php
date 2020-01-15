@@ -58,7 +58,12 @@ class BoardContoller extends Controller
         return view('board',['board'=>$current_board,'threads'=>$sorted_threads,'is_banned' => $is_banned]);
     }
 
-    //Создание треда
+
+    /**Создание треда
+     * @param Request $request
+     * @param $board_prefix
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function add(Request $request,$board_prefix)
     {
         Log::info('Пост метод сработал');
