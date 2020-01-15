@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ban;
 use App\Globalset;
 use Layout;
 use App\User;
@@ -18,6 +19,7 @@ use Image;
 
 class ThreadContoller extends Controller
 {
+
     /**
      * Отображение постов треда
      * @param Request $request
@@ -27,11 +29,18 @@ class ThreadContoller extends Controller
      */
     public function show(Request $request, $board_prefix, $thread_id)
     {
+        $is_banned = false;
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
         $current_thread = Thread::where('id',$thread_id)->get()->first();
         $posts = Post::where('thread_id',$current_thread->id)->get();
+        $bans = Ban::where('ip_hash',$request->ip())->get();
+        foreach ($bans as $ban){
+            if($ban->expire_time > now()){
+                $is_banned = true;
+            }
+        }
 
-        return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts]);
+        return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts,'is_banned' => $is_banned]);
     }
 
 
@@ -47,6 +56,15 @@ class ThreadContoller extends Controller
     {
         Log::info('Пост метод сработал');
 
+        //если юзер забанен не даем ему отправить данные.
+        $bans = Ban::where('ip_hash',$request->ip())->get();
+        foreach ($bans as $ban){
+            if($ban->expire_time > now()){
+                abort(403);
+            }
+        }
+
+
         $globalsets = Globalset::find(1);
         $current_board = Board::where('prefix',$board_prefix)->get()->first();
 
@@ -60,10 +78,10 @@ class ThreadContoller extends Controller
         if(Auth::check()){
             $user = Auth::user();
             $new_post->user_id = $user->id;
-            $new_post->Ip_hash = 'Registered';
+            $new_post->Ip_hash = $request->ip();
         }
         else{
-            $new_post->Ip_hash = Hash::make($request->ip());
+            $new_post->Ip_hash = $request->ip();
             $anon_user = Auth::check() ? Auth::user() : User::where('name', 'Anon')->get()->first();
             $new_post->user_id = $anon_user->id;
         }

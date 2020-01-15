@@ -4,6 +4,7 @@
     @include('layouts.boardtop')
     @if(!$thread->is_closed)
     <div class="container mb-4">
+        @if(!$is_banned)
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -37,6 +38,11 @@
 
             <button type="submit" class="btn btn-custom ">Ответить</button>
         </form>
+        @else
+            <div class="alert alert-danger text-center" role="alert">
+                Вы забанены и не можете создавать посты.
+            </div>
+        @endif
     </div>
     @else
         <div class="container mb-4">

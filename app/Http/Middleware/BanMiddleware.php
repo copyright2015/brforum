@@ -17,13 +17,13 @@ class BanMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $userIP = Hash::make($request->ip());
-        $ban = Ban::where('ip_hash',$userIP)->get()->first();
-        if($ban != null){
-            if($ban->is_404_ban){
+        $bans = Ban::where('ip_hash',$request->ip())->get();
+        foreach ($bans as $ban){
+            if($ban->is_404_ban == true && $ban->expire_time > now()){
                 abort(404);
             }
         }
+
         return $next($request);
     }
 }

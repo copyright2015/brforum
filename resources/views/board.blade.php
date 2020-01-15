@@ -5,6 +5,7 @@
 @section('content')
     @include('layouts.boardtop')
     <div class="container mb-4">
+        @if(!$is_banned)
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -36,8 +37,13 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-custom ">Ответить</button>
+            <button type="submit" class="btn btn-custom ">Создать тред</button>
         </form>
+        @else
+            <div class="alert alert-danger text-center" role="alert">
+                Вы забанены и не можете создавать треды.
+            </div>
+         @endif
     </div>
 
 @if(count($threads) > 0)

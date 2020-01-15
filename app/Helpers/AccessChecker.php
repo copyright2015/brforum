@@ -56,4 +56,8 @@ class AccessChecker
         }
         return false;
     }
+
+    public static function banCheck(){
+
+    }
 }

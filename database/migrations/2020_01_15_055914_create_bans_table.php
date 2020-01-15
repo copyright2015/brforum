@@ -17,6 +17,7 @@ class CreateBansTable extends Migration
             $table->bigIncrements('id');
             $table->text('Ip_hash')->nullable();
             $table->boolean('is_404_ban')->default(false);
+            $table->dateTime('expire_time');
             $table->timestamps();
         });
     }
