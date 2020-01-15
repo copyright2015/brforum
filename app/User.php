@@ -49,4 +49,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function bans() {
+        return $this->hasMany('App\Ban');
+    }
 }
