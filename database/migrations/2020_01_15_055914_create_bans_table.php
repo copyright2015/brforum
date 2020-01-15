@@ -16,9 +16,7 @@ class CreateBansTable extends Migration
         Schema::create('bans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('Ip_hash')->nullable();
-            $table->unsignedBigInteger('user_id');
             $table->boolean('is_404_ban')->default(false);
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
