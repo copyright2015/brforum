@@ -4,6 +4,7 @@
 namespace App\Helpers;
 
 use Auth;
+use App\User;
 
 class AccessChecker
 {
@@ -57,7 +58,15 @@ class AccessChecker
         return false;
     }
 
-    public static function banCheck(){
-
+    public static function checkUser(User $user)
+    {
+        $allowed = false;
+            $roles = $user->roles()->get();
+            foreach ($roles as $role) {
+                if ($role->name == "Admin" || $role->name == "Mod" || $role->name == "Global_mod") {
+                    $allowed = true;
+                }
+            }
+        return $allowed;
     }
 }
