@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function bans() {
         return $this->hasMany('App\Ban');
     }
+
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
 }

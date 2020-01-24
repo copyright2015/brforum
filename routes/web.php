@@ -51,24 +51,25 @@ Route::group(['prefix'=>'/admin', 'middleware'=>['auth','acl']], function(){
     Route::post('/bans',['uses'=>'Admin\BansController@unbun']);
 
     //Сообщения работающие в пределах админок и модерок
-    Route::get('/inbox',['uses'=>'Admin\InboxController@show','as'=>'admin_inbox']);
-    Route::post('/inbox',['uses'=>'Admin\BansController@send']);
+    Route::get('/inbox',['uses'=>'Admin\MessagesController@show','as'=>'admin_inbox']);
+    Route::get('/message/{message_id}',['uses'=>'Admin\MessagesController@showMessage','as'=>'admin_view_message']);
+    Route::post('/inbox',['uses'=>'Admin\MessagesController@send']);
 
     //Настройки доски. По типу бамплимита, лимита новых тредов, назавния, описания, количества картинок у постов и тд.
     Route::get('/boardset',['uses'=>'Admin\BoardSetController@show','as'=>'admin_board_set']);
-    Route::post('/boardset',['uses'=>'Admin\BansController@edit']);
+    Route::post('/boardset',['uses'=>'Admin\BoardSetController@edit']);
 
     //Список жалоб.
     Route::get('/appeal',['uses'=>'Admin\AppealController@show','as'=>'admin_appeal']);
-    Route::post('/appeal',['uses'=>'Admin\BansController@close']);
+    Route::post('/appeal',['uses'=>'Admin\AppealController@close']);
 
     //Очередь премодерации
     Route::get('/premod',['uses'=>'Admin\PremodController@show','as'=>'admin_premod']);
-    Route::post('/premod',['uses'=>'Admin\BansController@approve']);
+    Route::post('/premod',['uses'=>'Admin\PremodController@approve']);
 
     //Страница с баннерами доски.
     Route::get('/banners',['uses'=>'Admin\BannersController@show','as'=>'admin_banners']);
-    Route::post('/banners',['uses'=>'Admin\BansController@add']);
+    Route::post('/banners',['uses'=>'Admin\BannersController@add']);
 
     //Список пользователей, с возможностью менять их роли.
     //Доступно только админу
