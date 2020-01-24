@@ -18,7 +18,7 @@
                             @foreach($messages as $message)
                             <li>
                                 <div class="task-title">
-                                    <span class="task-title-sp"><a href="{{route('admin_view_message', ['message_id' => $message->id])}}">{{$message->title}}</a></span>
+                                    <span class="task-title-sp"><a href="{{route('admin_view_message', ['message_id' => $message->id])}}">{{$message->title}}, от {{$message->from}}</a></span>
                                     @if($message->is_readed == false)<span class="badge bg-important">Новое</span>@endif
                                         <form method="post" class="pull-right">
                                             @csrf
