@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBansTable extends Migration
+class CreateReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateBansTable extends Migration
      */
     public function up()
     {
-        Schema::create('bans', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('Ip_hash')->nullable();
-            $table->boolean('is_404_ban')->default(false);
-            $table->dateTime('expire_time');
-            $table->string('case',255)->nullable();
+            $table->text('case');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->boolean('is_readed')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateBansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bans');
+        Schema::dropIfExists('reports');
     }
 }

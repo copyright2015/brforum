@@ -24,6 +24,9 @@ class Post extends Model
         return $this->belongsTo('App\Thread');
     }
 
+    public function reports() {
+        return $this->hasMany('App\Report');
+    }
 
 //    protected $dispatchesEvents = [
 //        'saved' => PostSaved::class

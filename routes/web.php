@@ -60,8 +60,10 @@ Route::group(['prefix'=>'/admin', 'middleware'=>['auth','acl']], function(){
     Route::post('/boardset',['uses'=>'Admin\BoardSetController@edit']);
 
     //Список жалоб.
-    Route::get('/appeal',['uses'=>'Admin\AppealController@show','as'=>'admin_appeal']);
-    Route::post('/appeal',['uses'=>'Admin\AppealController@close']);
+    Route::get('/reports',['uses'=>'Admin\ReportController@show','as'=>'admin_reports']);
+    Route::get('/report/{report_id}',['uses'=>'Admin\ReportController@showReport','as'=>'admin_view_report']);
+    Route::post('/reports',['uses'=>'Admin\ReportController@operate']);
+    Route::post('/report/{report_id}',['uses'=>'Admin\ReportController@ban']);
 
     //Очередь премодерации
     Route::get('/premod',['uses'=>'Admin\PremodController@show','as'=>'admin_premod']);

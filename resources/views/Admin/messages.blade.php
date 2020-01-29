@@ -55,7 +55,7 @@
                         <div class="validate"></div>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="text" id="contact-message" placeholder="Your Message" rows="5"></textarea>
+                        <textarea class="form-control" name="text" id="contact-message" placeholder="Ваше сообщение" rows="5"></textarea>
                         <div class="validate"></div>
                     </div>
 

@@ -53,67 +53,7 @@
             <!--  notification start -->
             <ul class="nav top-menu">
                 @widget('NewMessages')
-                <li id="header_inbox_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="{{route('admin_dashboard')}}#">
-                        <i class=""><img src="{{url('img/report.png')}}" alt=""></i>
-
-                        <span class="badge bg-theme">6</span>
-                    </a>
-                    <ul class="dropdown-menu extended inbox">
-                        <div class="notify-arrow notify-arrow-green"></div>
-                        <li>
-                            <p class="green">6 новых репортов</p>
-                        </li>
-                        <li>
-                            <a href="{{route('admin_dashboard')}}#">
-                                <span class="subject">
-                  <span class="from">Anon</span>
-                  <span class="time">Just now</span>
-                  </span>
-                                <span class="message">
-                  Мать ебал.
-                  </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#">
-                                <span class="subject">
-                  <span class="from">Divya Manian</span>
-                  <span class="time">40 mins.</span>
-                  </span>
-                                <span class="message">
-                  Hi, I need your help with this.
-                  </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#">
-                                <span class="subject">
-                  <span class="from">Dan Rogers</span>
-                  <span class="time">2 hrs.</span>
-                  </span>
-                                <span class="message">
-                  Love your new Dashboard.
-                  </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html#">
-                                <span class="subject">
-                  <span class="from">Dj Sherman</span>
-                  <span class="time">4 hrs.</span>
-                  </span>
-                                <span class="message">
-                  Please, answer asap.
-                  </span>
-                            </a>
-                        <li>
-                            <a href="index.html#">Посмотреть все</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- inbox dropdown end -->
-            <!-- inbox dropdown end -->
+                @widget('NewReports')
             </ul>
 
         </div>
@@ -191,7 +131,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="grids.html">Список пользователей</a></li>
-                        <li><a href="todo_list.html">Репорты</a></li>
+                        <li><a href="{{route('admin_reports')}}">Репорты</a></li>
                         <li><a href="calendar.html">Баны</a></li>
                         <li><a href="gallery.html">Премодерация</a></li>
                         <li><a href="todo_list.html">Список модераторов</a></li>
