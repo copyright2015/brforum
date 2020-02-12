@@ -13,6 +13,8 @@
                 <h4>Репорт на пост >>{{$report->post->id}}</h4>
                 <h5 class="gen-case">
                     Причина: {{$report->case}}
+                    <br>
+                    Ip: {{ACL::isAdmin() ? $report->post->Ip_hash : md5($report->post->Ip_hash)}}
                 </h5>
             </header>
             <div class="panel-body ">

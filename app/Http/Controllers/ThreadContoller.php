@@ -40,7 +40,7 @@ class ThreadContoller extends Controller
             }
         }
 
-        return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts,'is_banned' => $is_banned]);
+        return view('thread',['board'=>$current_board,'thread'=>$current_thread,'posts'=>$posts,'is_banned' => $is_banned, 'bans' => $bans]);
     }
 
 

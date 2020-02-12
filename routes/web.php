@@ -31,6 +31,10 @@ Route::post('/{board_prefix}/thread/{thread_id}',['uses'=>'ThreadContoller@add']
 Route::get('/user/settings',['uses'=>'SettingsController@show', 'as'=>'settings', 'middleware'=>'auth']);
 Route::post('/user/settings','SettingsController@save')->middleware('auth');
 
+//создание жалобы
+Route::get('/report/{post_id}',['uses'=>'SendReportController@show','as'=>'send_report']);
+Route::post('/report/{post_id}',['uses'=>'SendReportController@send']);
+
 //Группа админских роутов с посредником auth
 Route::group(['prefix'=>'/admin', 'middleware'=>['auth','acl']], function(){
 
@@ -48,7 +52,7 @@ Route::group(['prefix'=>'/admin', 'middleware'=>['auth','acl']], function(){
 
     //Список банов. С возможностью разбанить.
     Route::get('/bans',['uses'=>'Admin\BansController@show','as'=>'admin_bans']);
-    Route::post('/bans',['uses'=>'Admin\BansController@unbun']);
+    Route::post('/bans',['uses'=>'Admin\BansController@unban']);
 
     //Сообщения работающие в пределах админок и модерок
     Route::get('/inbox',['uses'=>'Admin\MessagesController@show','as'=>'admin_inbox']);

@@ -22,16 +22,16 @@
                                         @if($report->is_readed == false)<span class="badge bg-important">Новое</span>@endif
                                         <form method="post" class="pull-right">
                                             @csrf
-                                            <input type="hidden" name="message_id" value="{{$report->id}}">
+                                            <input type="hidden" name="report_id" value="{{$report->id}}">
                                             <input type="hidden" name="action" value="delete">
                                             <button class="btn btn-danger btn-xs">Удалить</button>
                                         </form>
-                                        <form method="post" class="pull-right">
-                                            @csrf
-                                            <input type="hidden" name="message_id" value="{{$report->id}}">
-                                            <input type="hidden" name="action" value="delete">
-                                            <button class="btn btn-success btn-xs">Забанить</button>
-                                        </form>
+{{--                                        <form method="post" class="pull-right">--}}
+{{--                                            @csrf--}}
+{{--                                            <input type="hidden" name="message_id" value="{{$report->id}}">--}}
+{{--                                            <input type="hidden" name="action" value="delete">--}}
+{{--                                            <button class="btn btn-success btn-xs">Забанить</button>--}}
+{{--                                        </form>--}}
                                     </div>
                                 </li>
                             @endforeach

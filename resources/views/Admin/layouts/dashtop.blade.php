@@ -132,7 +132,7 @@
                     <ul class="sub">
                         <li><a href="grids.html">Список пользователей</a></li>
                         <li><a href="{{route('admin_reports')}}">Репорты</a></li>
-                        <li><a href="calendar.html">Баны</a></li>
+                        <li><a href="{{route('admin_bans')}}">Баны</a></li>
                         <li><a href="gallery.html">Премодерация</a></li>
                         <li><a href="todo_list.html">Список модераторов</a></li>
                     </ul>

@@ -40,7 +40,10 @@
         </form>
         @else
             <div class="alert alert-danger text-center" role="alert">
-                Вы забанены и не можете создавать посты.
+                Вы забанены и не можете создавать посты. <br>
+                @foreach($bans as $ban)
+                Причина: {{$ban->case}} Дата истечения: {{$bans->expire_time}} <br>
+                @endforeach
             </div>
         @endif
     </div>
@@ -70,7 +73,14 @@
                 @foreach($posts as $post)
                     <div class="card mb-4">
                         <div class="card-header banana">
-                            <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$post->theme}}</b> | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></h6>
+                            <div class="dropdown float-left mr-2">
+                                <a class="dropdown-toggle" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{route('send_report')}}">Пожаловаться</a>
+                                </div>
+                            </div>
+                            <span class="font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$post->theme}}</b> | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></span>
                         </div>
                         <div class="card-body postback">
                             @if( $post->img != null)
@@ -82,12 +92,15 @@
                             @endif
                             <span>{!!$post->message!!}</span>
                             <br>
+                                <div class="mod-notice" role="alert">
+                                    {{$post->mod_notice ?? ''}}
+                                </div>
                         </div>
                     </div>
                 @endforeach
             @else
                 <div class="alert alert-primary" role="alert">
-                    Пока что здесь нет постов.
+                    Пока что, здесь нет постов.
                 </div>
             @endif
         </div>

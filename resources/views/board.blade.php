@@ -42,6 +42,9 @@
         @else
             <div class="alert alert-danger text-center" role="alert">
                 Вы забанены и не можете создавать треды.
+                @foreach($bans as $ban)
+                    Причина: {{$ban->case}} Дата истечения: {{$bans->expire_time}} <br>
+                @endforeach
             </div>
          @endif
     </div>
@@ -66,6 +69,13 @@
                     @foreach($thread->posts as $post)
                         <div class="card mb-4">
                             <div class="card-header banana">
+                                <div class="dropdown float-left mr-2">
+                                    <a class="dropdown-toggle" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="{{route('send_report',['post_id'=>$post->id])}}" target="_blank" onclick="window.open(this.href,this.target,'width= 300,height=300,scrollbars=1');return false;">Пожаловаться</a>
+                                    </div>
+                                </div>
                                 <h6 class="my-0 font-weight-normal"><b>{{$board->default_user_name}}</b> || <b>{{$post->theme}}</b> | {{$post->created_at}} | <a href="#{{$post->id}}" name="{{$post->id}}">{{$post->id}}</a></h6>
                             </div>
                             <div class="card-body postback">
@@ -77,6 +87,12 @@
                                     @endforeach
                                 @endif
                                 <span>{!!$post->message!!}</span>
+                                <br>
+                                    @if($post->mod_notice)
+                                    <div class="mod-notice" role="alert">
+                                        {{$post->mod_notice}}
+                                    </div>
+                                    @endif
                             </div>
                         </div>
                     @endforeach
@@ -87,7 +103,7 @@
     @endforeach
     @else
        <div class="alert alert-primary" role="alert">
-            Пока что здесь нет тредов.
+            Пока что, здесь нет тредов.
        </div>
     @endif
 
